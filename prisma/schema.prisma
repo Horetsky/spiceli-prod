@@ -1,0 +1,81 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  surname   String
+  phone     String
+  createdAt DateTime @default(now())
+}
+
+model Products {
+  id          String    @id @default(cuid())
+  name        String
+  description String
+  price       Float
+  discount    Float?
+  type        ProductType
+  images      Image[]
+  features    String
+  isNew       Boolean   @default(true)
+  isBestseller Boolean   @default(false)
+  availability  AvailablityStatus   @default(IN_STOCK)
+  category    Category? @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  categoryId  String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @default(now())
+}
+
+model Post {
+  id            String   @id @default(cuid())
+  type          PostType
+  title         String
+  description   String
+  link          String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @default(now())
+}
+
+model Image {
+  id        String    @id @default(cuid())
+  url       String
+  name      String?
+  productId String?
+  Product   Products? @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+}
+
+model Category {
+  id        String   @id @default(cuid())
+  name      String
+  products Products[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+enum ProductType {
+  spice
+  herb
+  tea
+}
+
+enum AvailablityStatus {
+  IN_STOCK
+  OUT_OF_STOCK
+  RUNS_OUT
+}
+
+enum PostType {
+  video
+  article
+}

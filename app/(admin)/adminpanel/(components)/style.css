@@ -1,0 +1,14 @@
+.adminMenuActive {
+    position: relative;
+    background-color: hls(var(--customSecondary));    
+}
+.adminMenuActive::before {
+    position: absolute;
+    content: "";
+    width: 5px;
+    height: 100%;
+    top: 0;
+    left: -10px;
+    background: hsl(var(--customAccent));
+    border-radius: 4px;
+}

@@ -1,0 +1,7 @@
+.nav-title svg {
+    transform: translateX(0);
+    transition: transform 0.35s ease-out;
+}
+.nav-title:hover svg {
+    transform: translateX(-4px);
+}
