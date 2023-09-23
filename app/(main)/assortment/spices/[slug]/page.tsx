@@ -24,11 +24,16 @@ const page: FC<pageProps> = async ({ params }) => {
       images: true
     }
   }) as unknown as FullProduct
-  const category = await prisma.category.findUnique({
-    where: {
-      id: product.categoryId!
-    }
-  })
+
+  const getCategoty = async (id: string) => {
+    const category =  await prisma.category.findUnique({
+      where: {
+        id
+      }
+    })
+    return category
+  }
+  const category = product?.id ? await getCategoty(product?.id) : null
 
   const products = await prisma.products.findMany({
     where: {
