@@ -40,6 +40,7 @@ export const ProductSchema = z.object({
         z.string()
         .optional()
         .refine((value) => {
+            if (value === "") return true
             if (value) return noCommaRegex.test(value)
         }, {
             message: "Рядок не повинен містити символи коми. Використайте крапку.",

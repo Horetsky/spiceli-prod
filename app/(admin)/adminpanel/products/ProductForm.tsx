@@ -73,7 +73,6 @@ const ProductForm: FC<ProductFormProps> = ({ product, category }) => {
     }
 
     async function saveProduct (data: IProductSchema) {
-      console.log(data);
       if (data.images.length === 0) return toast.error("Додайте зображення")
       try {
           toast.promise(apiRequest({url: "/api/product", method: isUpdate ? "PUT" : "POST", data}),{
