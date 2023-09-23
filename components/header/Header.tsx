@@ -25,7 +25,7 @@ import { Products } from "@prisma/client";
 export const revalidate = 3600
 
 const Header = () => {
-    const [isOpen, setIsOpen] = useState<boolean>(false) // Is sidebar open
+    const [isOpen, setIsOpen] = useState<boolean>(false) // is sidebar open
     const admin = useAdminRequest()
     const { notAvatibleAllert } = useNotAvatible()
 
