@@ -1,16 +1,13 @@
-"use client"
-
-import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import SearchBar from "../searchBar/SearchBar";
-import { Icons } from "../ui/icons";
 import { IoMdArrowDropdown } from "react-icons/io"
-import useNotAvatible from "@/hooks/useNotAvatible";
 import { routes } from "@/lib/routes";
-import { apiRequest } from "@/hooks/apiRequest";
+import prisma from "@/prisma/client";
 
-import useDebounceSearch, { searchFunc } from "@/hooks/useDebounceSearch";
+import { 
+    HeaderSidebar,
+    HeaderSearchBar
+} from "./HeaderAssets";
 
 import {
     DropdownMenu,
@@ -18,47 +15,15 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
   } from "@/components/ui/dropdown-menu"
-import Sidebar from "./Sidebar";
-import useAdminRequest from "@/hooks/useAdminRequest";
-import { Products } from "@prisma/client";
 
 export const revalidate = 3600
 
-const Header = () => {
-    const [isOpen, setIsOpen] = useState<boolean>(false) // is sidebar open
-    const admin = useAdminRequest()
-    const { notAvatibleAllert } = useNotAvatible()
-
-    const searchProduct: searchFunc<Products> = async (searchTerm: string) => {
-        const result = await apiRequest({
-            url: "/api/product",
-            method: "GET"
-        })
-        
-        return result.filter((item: Products) => item.name.toLowerCase().includes(searchTerm.toLowerCase()))
-    }
-
-
-    const { handleSearch, loadingStatus, searchResult } = useDebounceSearch<Products>(searchProduct)
+const Header = async () => {
+    const admin = await prisma.admin.findMany()
     
-    useEffect(() => {
-        window.addEventListener("resize", handleResize)
-
-        return () => window.removeEventListener("resize", handleResize)
-    }, [])
-
-    useEffect(() => {
-        if (isOpen) document.body.classList.add("noScroll")
-        else document.body.classList.remove("noScroll")
-    }, [isOpen])
-    
-    const handleResize = () => {
-        if (window.innerWidth > 768) setIsOpen(false)
-    }
 
     return (
         <div className="w-full">
-            <Sidebar isOpen={isOpen} admin={admin} onClick={() => setIsOpen(false)}/>
             <div className= "container grid gap-x-[1rem] justify-items-center grid-cols-[1fr_1fr] md:grid-cols-[0.5fr_2fr_0.1fr_0.1fr] items-center">
                 <Link href={routes.home} className="justify-self-start">
                     <Image 
@@ -70,22 +35,8 @@ const Header = () => {
                         alt="logo"
                     />
                 </Link>
-                <SearchBar 
-                    searchFunc={(request) => handleSearch(request)} 
-                    loading={loadingStatus}
-                    searchResults={searchResult}
-                    placeholder="Знайти спеції..." 
-                    className="rounded-full hidden md:flex" 
-                />
-                <div className="hidden md:block" onClick={() => notAvatibleAllert()} >
-                    <Icons.cart className="w-[40px] hover:opacity-70 duration-300 cursor-pointer" />
-                </div>
-                <div className="hidden md:block" onClick={() => notAvatibleAllert()} >
-                    <Icons.profile className="w-[40px] hover:opacity-70 duration-300 cursor-pointer" />
-                </div>
-                <div className="justify-self-end block md:hidden" onClick={() => setIsOpen(!isOpen)}>
-                    <Icons.menu />
-                </div>
+                <HeaderSearchBar />
+                <HeaderSidebar admin={admin} />
             </div>
             <div className="hidden md:block border-customSecondary-foreground border-y-[1px] py-[16px]">
                 <div className="container grid grid-cols-[1fr_1.5fr] items-center">
@@ -122,15 +73,14 @@ const Header = () => {
                             Блог
                         </Link>
                     </ul>
-                    {
-                        admin &&
-                            <div className="flex flex-col justify-self-end text-right">
-                                <Link href={`tel:${admin?.phone}`} className="font-semibold text-base">
-                                    {admin?.phone}
-                                </Link>
-                                <span className="-mt-2 font-light text-sm text-customSecondary">5 днів на тиждень з 7:00</span>
-                            </div>
-                    }
+                    <div className="flex flex-col justify-self-end text-right">
+                        <Link href={`tel:${admin?.[0].phone}`} className="font-semibold text-base">
+                            {
+                                admin?.[0].phone
+                            }
+                        </Link>
+                        <span className="-mt-2 font-light text-sm text-customSecondary">5 днів на тиждень з 7:00</span>
+                    </div>
                 </div>
             </div>
         </div>

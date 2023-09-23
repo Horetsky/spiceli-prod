@@ -4,14 +4,12 @@ import Image from 'next/image'
 import { Icons } from '../ui/icons'
 
 import { routes } from '@/lib/routes'
-import useNotAvatible from '@/hooks/useNotAvatible'
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
-
 
 import "./style.css"
 
@@ -25,9 +23,8 @@ interface SidebarProps {
 }
 
 const Sidebar: FC<SidebarProps> = ({ isOpen, onClick, admin }) => {
-  const { notAvatibleAllert } = useNotAvatible()
   return (
-    <div className={`container pb-[120px] font-light text-lg sidebar ${isOpen && 'sidebar--open'}`}>
+    <div className={`container pb-[120px] font-light text-lg sidebar  ${isOpen && 'sidebar--open'}`}>
       <div className='grid grid-cols-[1fr_1fr] items-center'>
         <Link href={routes.home} className="justify-self-start"
           onClick={onClick}
@@ -75,6 +72,9 @@ const Sidebar: FC<SidebarProps> = ({ isOpen, onClick, admin }) => {
                       </Link>
                       <Link href={routes.herbs} onClick={onClick}>
                         <li>Трави</li>
+                      </Link>
+                      <Link href={routes.teas} onClick={onClick}>
+                        <li>Чаї</li>
                       </Link>
 
                     </ul>

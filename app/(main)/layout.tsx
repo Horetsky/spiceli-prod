@@ -8,6 +8,8 @@ import Header from '@/components/header/Header'
 import Footer from '@/components/footer/Footer'
 
 import { Toaster } from 'react-hot-toast'
+import NextTopLoader from "nextjs-toploader";
+
 const montserrat = Montserrat({ 
   subsets: ['latin'], 
   variable: "--font-montserrat" 
@@ -40,6 +42,16 @@ export default function RootLayout({
   return (
     <html lang="ua">
       <body className={`${ montserrat.variable } ${ sofia_sans.variable } ${ grechen_fuemen.variable }`}>
+          <NextTopLoader
+              color={'hsla(10,100%,58%)'}
+              initialPosition={0.08}
+              crawlSpeed={200}
+              crawl={true}
+              showSpinner={false}
+              easing="ease"
+              speed={200}
+              height={5}
+          />
         <header>
           <Header />
         </header>
