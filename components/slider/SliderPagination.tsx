@@ -19,6 +19,7 @@ const SliderPagination: FC<SliderPaginationProps> = ({ pagination, activeIndex }
                 pagination.slice(0, 4).map((item, i) => (
                   <div className='shrink-0 relative w-[60px] h-[60px] md:w-[90px] md:h-[90px] rounded-[4px] overflow-hidden hover:opacity-80 duration-300' 
                     onClick={() => swiper.slideTo(i)}
+                    key={item?.id}
                   >
                       <Image 
                           src={item.url}

@@ -27,7 +27,6 @@ export const apiRequest = async <T extends any>({
     method,
 }: ApiRequestOptions): Promise<T | any> => {
     try {
-        console.log("BODY", data);
         const res = await fetch(url, {
             method: method,
             body: JSON.stringify(data),

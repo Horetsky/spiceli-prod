@@ -27,6 +27,7 @@ const page: FC<pageProps> = async ({}) => {
           {
             discounts?.filter(item => item.discount).map(item => (
               <ProductCard
+                key={item?.id}
                 product={item}
               />
             ))

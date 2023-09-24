@@ -16,7 +16,10 @@ const Video: FC<VideoProps> = ({ data}) => {
       }
       {
           data?.map(item => (
-            <BlogCard post={item} />
+            <BlogCard
+              key={item?.id}
+              post={item} 
+            />
           ))
       }
     </BlogGrid>

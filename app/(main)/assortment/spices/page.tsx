@@ -28,6 +28,7 @@ const page: FC<pageProps> = async ({}) => {
           {
             spices?.map(item => (
               <ProductCard
+                key={item?.id}
                 product={item}
               />
             ))

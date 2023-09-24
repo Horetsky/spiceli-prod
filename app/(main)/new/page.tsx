@@ -30,6 +30,7 @@ const page: FC<pageProps> = async ({}) => {
           {
             news?.map(item => (
               <ProductCard
+                key={item?.id}
                 product={item}
               />
             ))

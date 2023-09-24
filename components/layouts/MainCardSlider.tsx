@@ -21,7 +21,7 @@ const MainCardSlider: FC<MainSliderProps> = ({ slides }) => {
         >
             {
               slides?.map(slide => (
-                <SwiperSlide>
+                <SwiperSlide key={slide?.id}>
                   <ProductCard
                     product={slide}
                   />

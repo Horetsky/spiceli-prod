@@ -34,6 +34,7 @@ const Tabs: FC<TabsProps> = ({ tabs }) => {
         {
           tabs.find(tab => tab.id === activeTab)?.products.map(item => (
             <ProductCard
+              key={item?.id}
               product={item}
             />
           ))
