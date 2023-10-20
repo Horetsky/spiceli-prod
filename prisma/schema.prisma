@@ -18,31 +18,31 @@ model Admin {
 }
 
 model Products {
-  id          String    @id @default(cuid())
-  name        String
-  description String
-  price       Float
-  discount    Float?
-  type        ProductType
-  images      Image[]
-  features    String
-  isNew       Boolean   @default(true)
-  isBestseller Boolean   @default(false)
-  availability  AvailablityStatus   @default(IN_STOCK)
-  category    Category? @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-  categoryId  String?
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @default(now())
+  id           String            @id @default(cuid())
+  name         String
+  description  String
+  price        Float
+  discount     Float?
+  type         ProductType
+  images       Image[]
+  features     String
+  isNew        Boolean           @default(true)
+  isBestseller Boolean           @default(false)
+  availability AvailablityStatus @default(IN_STOCK)
+  category     Category?         @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  categoryId   String?
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @default(now())
 }
 
 model Post {
-  id            String   @id @default(cuid())
-  type          PostType
-  title         String
-  description   String
-  link          String?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @default(now())
+  id          String   @id @default(cuid())
+  type        PostType
+  title       String
+  description String
+  link        String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
 }
 
 model Image {
@@ -56,17 +56,18 @@ model Image {
 }
 
 model Category {
-  id        String   @id @default(cuid())
+  id        String     @id @default(cuid())
   name      String
-  products Products[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
+  products  Products[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @default(now())
 }
 
 enum ProductType {
   spice
   herb
   tea
+  sweet
 }
 
 enum AvailablityStatus {

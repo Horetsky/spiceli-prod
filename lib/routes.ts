@@ -3,6 +3,7 @@ export const routes = {
     spices: "/assortment/spices",
     herbs: "/assortment/herbs",
     teas: "/assortment/teas",
+    sweets: "/assortment/sweets",
     new: "/new",
     blog: "/blog",
     cart: "/cart",

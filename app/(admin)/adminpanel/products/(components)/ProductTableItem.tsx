@@ -51,13 +51,15 @@ const ProductTableItem: FC<ProductTableItemProps> = ({product, number}) => {
                     style={
                         {
                             backgroundColor: product.type === $Enums.ProductType.spice ? "#CE5959" :
-                            product.type === $Enums.ProductType.herb ? "#9EB384" : "#FFCC70"
+                            product.type === $Enums.ProductType.herb ? "#9EB384" :
+                            product.type === $Enums.ProductType.tea ? "#FFCC70" : "#E95793"
                         }
                     }
                 >
                     {
                         product.type === $Enums.ProductType.spice ? <>Приправа</> :
-                        product.type === $Enums.ProductType.herb ? <>Трава</> : <>Чай</>
+                        product.type === $Enums.ProductType.herb ? <>Трава</> : 
+                        product.type === $Enums.ProductType.tea ? <>Чай</> : <>Солодощі</>
                     }
                 </div>
             </TableCell>

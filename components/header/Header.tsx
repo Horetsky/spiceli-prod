@@ -61,6 +61,9 @@ const Header = async () => {
                             <Link href={routes.teas}>
                                 <DropdownMenuItem>Чаї</DropdownMenuItem>
                             </Link>
+                            <Link href={routes.sweets}>
+                                <DropdownMenuItem>Солодощі</DropdownMenuItem>
+                            </Link>
                         </DropdownMenuContent>
                         </DropdownMenu>
                         

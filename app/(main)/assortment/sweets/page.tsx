@@ -1,0 +1,42 @@
+import { FC } from 'react'
+import ProductGrid from '@/components/layouts/ProductGrid'
+import ProductCard from '@/components/cards/ProductCard'
+import PageTitle from '@/components/titles/PageTitle'
+import prisma from '@/prisma/client'
+
+interface pageProps {
+    
+}
+
+export const revalidate = 30
+
+const page: FC<pageProps> = async ({}) => {
+    const sweets = await prisma.products.findMany({
+        where: {
+            type: "sweet"
+        },
+        include: {
+            images: true
+        }
+    })
+    return (
+        <div>
+            <PageTitle 
+                title="Солодощі"
+                descr="Ми пропонуємо широкий вибір унікальних солодощів, які точно припадуть до душі як дітям, так і дорослим."
+            />
+            <ProductGrid>
+                {
+                  sweets?.map(item => (
+                      <ProductCard
+                          key={item?.id}
+                          product={item}
+                      />
+                  ))
+                }
+            </ProductGrid>
+        </div>
+      )
+}
+
+export default page

@@ -13,7 +13,8 @@ export const ProductSchema = z.object({
     type: z.union([
         z.literal($Enums.ProductType.spice),
         z.literal($Enums.ProductType.herb),
-        z.literal($Enums.ProductType.tea)
+        z.literal($Enums.ProductType.tea),
+        z.literal($Enums.ProductType.sweet)
     ]),
     productId: z.string().optional(),
     isNew: z.boolean().optional(),
