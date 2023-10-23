@@ -46,11 +46,16 @@ const ProductTableItem: FC<ProductTableItemProps> = ({product, number}) => {
         <TableRow>
             <TableCell className="font-medium">{number}</TableCell>
             <TableCell>{product.name}</TableCell>
-            <TableCell>
-                <div className='w-24 rounded-[4px] text-center text-white'
+            <TableCell className='w-[250px]'>
+                <div className='w-full rounded-[4px] text-center text-white'
                     style={
                         {
-                            backgroundColor: product.type === $Enums.ProductType.spice ? "#CE5959" :
+                            backgroundColor: 
+                                product.type === $Enums.ProductType.spice 
+                                || product.type === $Enums.ProductType.mix
+                                || product.type === $Enums.ProductType.flavor
+                                || product.type === $Enums.ProductType.supp
+                                ? "#CE5959" :
                             product.type === $Enums.ProductType.herb ? "#9EB384" :
                             product.type === $Enums.ProductType.tea ? "#FFCC70" : "#E95793"
                         }
@@ -58,6 +63,9 @@ const ProductTableItem: FC<ProductTableItemProps> = ({product, number}) => {
                 >
                     {
                         product.type === $Enums.ProductType.spice ? <>Приправа</> :
+                        product.type === $Enums.ProductType.mix ? <>Суміш прянощів</> :
+                        product.type === $Enums.ProductType.flavor ? <>Прянощі</> :
+                        product.type === $Enums.ProductType.supp ? <>Харчові добавки</> :
                         product.type === $Enums.ProductType.herb ? <>Трава</> : 
                         product.type === $Enums.ProductType.tea ? <>Чай</> : <>Солодощі</>
                     }
@@ -69,7 +77,7 @@ const ProductTableItem: FC<ProductTableItemProps> = ({product, number}) => {
                     product.discount ?? <>—</>
                 }
             </TableCell>
-            <TableCell>
+            <TableCell className='w-[250px]'>
                 <div className='w-full rounded-[4px] text-center text-white'
                     style={{backgroundColor: 
                             product.availability === $Enums.AvailablityStatus.IN_STOCK ? "#1E8D5F" :

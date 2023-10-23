@@ -14,7 +14,10 @@ export const ProductSchema = z.object({
         z.literal($Enums.ProductType.spice),
         z.literal($Enums.ProductType.herb),
         z.literal($Enums.ProductType.tea),
-        z.literal($Enums.ProductType.sweet)
+        z.literal($Enums.ProductType.sweet),
+        z.literal($Enums.ProductType.mix),
+        z.literal($Enums.ProductType.flavor),
+        z.literal($Enums.ProductType.supp)
     ]),
     productId: z.string().optional(),
     isNew: z.boolean().optional(),

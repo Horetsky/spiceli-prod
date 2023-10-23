@@ -3,6 +3,7 @@ import ProductGrid from '@/components/layouts/ProductGrid'
 import ProductCard from '@/components/cards/ProductCard'
 import PageTitle from '@/components/titles/PageTitle'
 import prisma from '@/prisma/client'
+import ProductTabs from './(components)/ProductTabs'
 interface pageProps {
   
 }
@@ -10,30 +11,23 @@ interface pageProps {
 export const revalidate = 30
 
 const page: FC<pageProps> = async ({}) => {
-  const spices = await prisma.products.findMany({
+  const products = await prisma.products.findMany({
     where: {
-      type: "spice"
+      type: {
+        notIn: ["sweet", "tea", "herb"]
+      }
     },
     include: {
       images: true
     }
   })
   return (
-    <div>
+    <div className='flex flex-col gap-y-[20px]'>
       <PageTitle 
         title="Спеції"
         descr="Ми пропонуємо широкий вибір унікальних смаків, які додадуть вашим стравам особливий шарм та неперевершений смаковий досвід."
       />
-      <ProductGrid>
-          {
-            spices?.map(item => (
-              <ProductCard
-                key={item?.id}
-                product={item}
-              />
-            ))
-          }
-      </ProductGrid>
+      <ProductTabs products={products} />
     </div>
   )
 }

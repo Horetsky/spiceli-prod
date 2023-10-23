@@ -51,6 +51,9 @@ const UIForm: FC<UIFormProps> = ({ form, category }) => {
                     {label: 'Трава', value: $Enums.ProductType.herb},
                     {label: 'Чай', value: $Enums.ProductType.tea},
                     {label: 'Солодощі', value: $Enums.ProductType.sweet},
+                    {label: 'Суміш прянощів', value: $Enums.ProductType.mix},
+                    {label: 'Прянощі', value: $Enums.ProductType.flavor},
+                    {label: 'Харчові добавки', value: $Enums.ProductType.supp},
                 ]}
             />
             <FormInput

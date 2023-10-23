@@ -68,6 +68,9 @@ enum ProductType {
   herb
   tea
   sweet
+  mix // суміш прянощів
+  flavor // прянощі
+  supp // добавки
 }
 
 enum AvailablityStatus {
