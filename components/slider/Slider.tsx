@@ -10,10 +10,10 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import "./style.css"
 
 import SliderPagination from "./SliderPagination";
 import SliderControl from "./SliderControl";
-import SliderControlCenter from "./SliderControlCenter";
 import { Image } from "@prisma/client";
 
 interface SliderProps extends SwiperProps {
@@ -82,6 +82,10 @@ export default function Slider ( { children, spaceBetween, slidesPerView, varian
             spaceBetween={spaceBetween}
             slidesPerView={slidesPerView}
             modules={pagination ? [Navigation, Pagination, Scrollbar, A11y] : []}
+            onSwiper={(e) => {
+              setIsBeginning(e.isBeginning)
+              setIsEnd(e.isEnd)
+            }}
             onSlideChange={(e) => {
                 setActiveSlide(e.activeIndex)
                 setIsBeginning(e.isBeginning)
@@ -110,12 +114,7 @@ export default function Slider ( { children, spaceBetween, slidesPerView, varian
               <SliderControl
                 isBeginning={isBeginning}
                 isEnd={isEnd}
-              /> : 
-          controls === "center" ?
-            <SliderControlCenter
-              isBeginning={isBeginning}
-              isEnd={isEnd}
-            /> : null
+              /> : null
         }
       </Swiper>
     );

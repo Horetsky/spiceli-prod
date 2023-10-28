@@ -8,13 +8,18 @@ import DetailsBubble from '../ui/custom/DetailsBubble';
 import { Button } from '../ui/button';
 import { FullProduct } from '@/types/types';
 
+import generateProductUrl from '@/utils/generateProductUrl';
+
 interface ProductCardProps {
     product: FullProduct
 }
 
+
+
 const ProductCard: FC<ProductCardProps> = ({ product }) => {
+    const url = generateProductUrl(product.type, product.id)
     return (
-        <Link href={`/assortment/${product?.type}s/${product?.id}`} className='max-w-[313.5px] min-w-[165.5px]'>
+        <Link href={url} className='max-w-[313.5px] min-w-[165.5px]'>
             <div className="productCard hover:scale select-none p-[12px] md:p-[20px] rounded-[8px] overflow-hidden bg-white w-full">
                 <div className="relative min-h-[302px] md:min-h-[430px] grid grid-rows-[140px_1fr_0.7fr] md:grid-rows-[260px_1fr_0.5fr] content-between gap-y-1 md:gap-y-2 font-norms text-customPrimary">
                     {

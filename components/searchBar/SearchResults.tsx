@@ -3,6 +3,7 @@ import { FC } from 'react'
 import Link from 'next/link'
 import { Products } from '@prisma/client'
 import { LuSearch, LuArrowUpLeft } from 'react-icons/lu'
+import generateProductUrl from '@/utils/generateProductUrl';
 
 interface SearchResultsProps {
     resultItem: Products;
@@ -10,8 +11,9 @@ interface SearchResultsProps {
 }
 
 const SearchResults: FC<SearchResultsProps> = ({ resultItem, onClick }) => {
+    const url = generateProductUrl(resultItem.type, resultItem.id)
     return (
-        <Link href={`/assortment/${resultItem.type}s/${resultItem.id}`} className='w-full bg-customSecondary-foreground flex items-center justify-between hover:bg-[#E3E9EE] duration-300 px-4 py-2'
+        <Link href={url} className='w-full bg-customSecondary-foreground flex items-center justify-between hover:bg-[#E3E9EE] duration-300 px-4 py-2'
             onClick={() => onClick()}
         >
             <div className='flex items-center gap-x-4'>

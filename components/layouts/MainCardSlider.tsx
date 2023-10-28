@@ -6,6 +6,7 @@ import { SwiperSlide } from 'swiper/react';
 
 import ProductCard from '@/components/cards/ProductCard';
 import { FullProduct } from '@/types/types';
+import SliderControl from '../slider/SliderControl';
 
 interface MainSliderProps {
   slides: FullProduct[]
