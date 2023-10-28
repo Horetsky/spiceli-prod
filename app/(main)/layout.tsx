@@ -32,11 +32,11 @@ const grechen_fuemen = localFont({
 export const metadata: Metadata = {
   title: 'Spiceli',
   description: 'Припави на будь-який смак',
-  // icons: {
-  //     icon: `${process.env.NEXT_PUBLIC_API_URL}/icons/logo.png`,
-  //     shortcut: `${process.env.NEXT_PUBLIC_API_URL}/icons/logo.png`,
-  //     apple: `${process.env.NEXT_PUBLIC_API_URL}/icons/logo.png`,
-  // },
+  icons: {
+      icon: `/images/logo.png`,
+      shortcut: `/images/logo.png`,
+      apple: `/images/logo.png`,
+  },
   openGraph: {
       type: "website",
       url: `${process.env.NEXT_PUBLIC_API_URL}`,
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
       description: "Припави на будь-який смак",
       siteName: "Spiceli",
       images: [
-          {url: `${process.env.NEXT_PUBLIC_API_URL}/icons/logo.png`}
+          {url: `/images/logo.png`}
       ]
   }
 }
