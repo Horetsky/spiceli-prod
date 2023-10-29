@@ -9,7 +9,7 @@ interface pageProps {
   
 }
 
-export const revalidate = 50
+export const dynamic = 'force-dynamic'
 
 const page: FC<pageProps> = async ({}) => {
   const news = await prisma.products.findMany({

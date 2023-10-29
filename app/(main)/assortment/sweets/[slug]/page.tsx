@@ -12,8 +12,8 @@ interface pageProps {
     }
 }
 
-export const revalidate = 50
 export const dynamicParams = true
+export const revalidate = 86400
 
 const page: FC<pageProps> = async ({ params }) => {
     const product = await prisma.products.findUnique({

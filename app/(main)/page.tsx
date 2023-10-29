@@ -3,7 +3,7 @@ import Popular from "./(components)/(popular)/Popular";
 import Taste from "./(components)/(taste)/Taste";
 import Nature from "./(components)/(nature)/Nature";
 
-export const revalidate = 3600
+export const revalidate = 86400
 
 const HomePage = async () => {
   return (
