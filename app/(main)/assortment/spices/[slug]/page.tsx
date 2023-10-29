@@ -12,6 +12,25 @@ interface pageProps {
   }
 }
 
+export async function generateStaticParams () {
+  const products = await prisma.products.findMany({
+    where: {
+      type: {
+        in: ["spice", "flavor", "mix", "supp"]
+      }
+    },
+    select: {
+      id: true
+    }
+  })
+
+  return [
+    ...products.map((product) => ({
+      slug: product.id,
+    })),
+  ]
+}
+
 export const dynamicParams = true
 export const revalidate = 86400
 
