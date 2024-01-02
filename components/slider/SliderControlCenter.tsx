@@ -11,20 +11,20 @@ type SliderControlProps = {
 const SliderControlCenter = ( { isBeginning, isEnd, className = 'float-right' } : SliderControlProps ) => {
     const swiper = useSwiper();
     return (
-        <div className={`${ className } -mt-[50px] flex pointer-events-none justify-between w-full absolute z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`}>
+        <div className={`${ className } flex pointer-events-none justify-between w-full absolute z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`}>
             <button
                 className="cursor-pointer flex items-center justify-center pointer-events-auto"
                 style={{opacity: isBeginning ? "0.5" : "1"}}
                 onClick={() => swiper.slidePrev()}
             >
-                <SlArrowLeft className="text-customSecondary text-[40px]" />
+                <SlArrowLeft className="text-white text-[40px]" />
             </button>
             <button
                 className="cursor-pointer flex items-center justify-center pointer-events-auto"
                 style={{opacity: isEnd ? "0.5" : "1"}}
                 onClick={() => swiper.slideNext()}
             >
-                <SlArrowRight className="text-customSecondary text-[40px]" />
+                <SlArrowRight className="text-white text-[40px]" />
             </button>
         </div>
     );

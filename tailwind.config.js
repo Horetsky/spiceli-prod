@@ -22,7 +22,8 @@ module.exports = {
       lg: ['18px', '2rem'],
       xl: ['22px', '2.25rem'],
       '2xl': ['24px', '2.25rem'],
-      '3xl': ['30px', '2.25rem']  // section title
+      '3xl': ['30px', '2.25rem'],  // section title
+      '4xl': ['38px', '2.3rem']  // section title
     },
     extend: {
       fontFamily: {

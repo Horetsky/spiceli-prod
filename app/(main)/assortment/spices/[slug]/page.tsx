@@ -1,10 +1,10 @@
 import { FC } from 'react'
 
-import Buy from '../../(components)/Buy'
 import SectionTitle from '@/components/titles/SectionTitle'
 import MainCardSlider from '@/components/layouts/MainCardSlider'
 import prisma from '@/prisma/client'
 import { FullProduct } from '@/types/types'
+import Buy from "@/app/(main)/assortment/(components)/Buy";
 
 interface pageProps {
   params: {
