@@ -24,8 +24,8 @@ const Header = async () => {
 
     return (
         <div className="w-full">
-            <div className= "container grid gap-x-[1rem] justify-items-center grid-cols-[1fr_1fr] md:grid-cols-[0.5fr_2fr_0.1fr_0.1fr] items-center">
-                <Link href={routes.home} className="justify-self-start">
+            <div className= "container grid gap-x-[1rem] justify-items-center grid-cols-[1fr_40px_40px] md:grid-cols-[0.5fr_2fr_0.1fr_0.1fr] items-center">
+                <Link href={routes.home} className="justify-self-start mr-11 md:mr-0">
                     <Image 
                         src="/icon/logo.svg"
                         width={235}

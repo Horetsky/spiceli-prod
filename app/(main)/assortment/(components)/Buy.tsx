@@ -37,7 +37,7 @@ const Buy: FC<BuyProps> = ({ product, category, admin }) => {
             <div>
               {
                 product.discount &&
-                  <div className='md:pb-0 pb-0 -mb-[8px] font-normal text-base md:text-lg line-through text-customSecondary opacity-80'>
+                  <div className='md:pb-0 pb-0 -mb-[8px] font-sofia text-base md:text-lg line-through text-customSecondary opacity-80'>
                       {product.price} грн
                   </div>
               }
@@ -56,10 +56,7 @@ const Buy: FC<BuyProps> = ({ product, category, admin }) => {
             </div>
 
             <div className='flex flex-col justify-self-end text-left'>
-
-                {/*<h3 className="font-semibold text-xl">Замовляй зараз</h3>*/}
                 <MakeOrder product={product} />
-
             </div>
             
             {

@@ -166,3 +166,12 @@
 .noScroll {
   overflow: hidden !important;
 }
+
+.scrollbar-hidden {
+  overflow: hidden;
+
+  scrollbar-color: transparent transparent; /*hides the scrollbar for firefox */
+  ::-webkit-scrollbar {
+    display: none !important;
+  }
+}

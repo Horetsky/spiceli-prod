@@ -9,7 +9,7 @@ import FormInput from '@/components/ui/form/FormInput'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
-import { LuEdit, LuSave, LuX } from 'react-icons/lu'
+import { LuPencil, LuSave, LuX } from 'react-icons/lu'
 
 import toast from 'react-hot-toast'
 import { apiRequest } from '@/hooks/apiRequest'
@@ -90,7 +90,7 @@ const SettingsForm: FC<settingsFormProps> = ({ user }) => {
                         </Button>
                     </div> :
                         <Button variant="admin" onClick={handleReset} >
-                            <LuEdit className="text-xl" />
+                            <LuPencil className="text-xl" />
                             Редагувати
                         </Button>
                 }

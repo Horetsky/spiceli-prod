@@ -11,6 +11,7 @@ import useDebounceSearch from "@/hooks/useDebounceSearch"
 import { Products } from "@prisma/client"
 
 import { Icons } from "../ui/icons"
+import Cart from "@/components/cart";
 
 export const HeaderSidebar = ({ admin }: {admin: any}) => {
     const [isOpen, setIsOpen] = useState<boolean>(false) // Is sidebar open
@@ -33,9 +34,7 @@ export const HeaderSidebar = ({ admin }: {admin: any}) => {
     return (
         <>
             <Sidebar isOpen={isOpen} admin={admin} onClick={() => setIsOpen(false)}/>
-            <div className="hidden md:block" onClick={() => notAvatibleAllert()} >
-                <Icons.cart className="w-[40px] hover:opacity-70 duration-300 cursor-pointer" />
-            </div>
+            <Cart />
             <div className="hidden md:block" onClick={() => notAvatibleAllert()} >
                 <Icons.profile className="w-[40px] hover:opacity-70 duration-300 cursor-pointer" />
             </div>
