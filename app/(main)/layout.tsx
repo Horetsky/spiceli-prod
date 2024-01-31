@@ -9,6 +9,7 @@ import Footer from '@/components/footer/Footer'
 
 import { Toaster } from 'react-hot-toast'
 import NextTopLoader from "nextjs-toploader";
+import { CartProvider } from "@/providers/cart-provider";
 
 const montserrat = Montserrat({ 
   subsets: ['latin'], 
@@ -56,31 +57,33 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ua">
-      <body className={`${ montserrat.variable } ${ sofia_sans.variable } ${ grechen_fuemen.variable }`}>
-          <NextTopLoader
-              color={'hsla(10,100%,58%)'}
-              initialPosition={0.08}
-              crawlSpeed={200}
-              crawl={true}
-              showSpinner={false}
-              easing="ease"
-              speed={200}
-              height={5}
-          />
-        <header>
-          <Header />
-        </header>
+    <CartProvider>
+          <body className={`${ montserrat.variable } ${ sofia_sans.variable } ${ grechen_fuemen.variable }`}>
+              <NextTopLoader
+                  color={'hsla(10,100%,58%)'}
+                  initialPosition={0.08}
+                  crawlSpeed={200}
+                  crawl={true}
+                  showSpinner={false}
+                  easing="ease"
+                  speed={200}
+                  height={5}
+              />
+            <header>
+              <Header />
+            </header>
 
-        <main>
-          {children}
-        </main>
+            <main>
+              {children}
+            </main>
 
-          <Toaster />
-          
-        <footer>
-          <Footer />
-        </footer>
-      </body>
+              <Toaster />
+
+            <footer>
+              <Footer />
+            </footer>
+          </body>
+    </CartProvider>
     </html>
   )
 }

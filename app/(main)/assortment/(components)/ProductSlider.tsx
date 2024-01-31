@@ -38,11 +38,7 @@ type Props = {
 }
 
 const ProductSlider: FC<Props> = ({ product }) => {
-    const images: ImageInput[] = [0, 1, 2, 3, 4, 5].map((item, i) => ({
-        id: i.toString(),
-        url: product.images[0].url,
-        name: ""
-    }))
+    const images = product.images
     // Swiper thumbsinstance
     const [swiperThumbs, updateSwiperThumbs] = useState<SwiperClass>();
 

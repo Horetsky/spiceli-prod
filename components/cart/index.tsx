@@ -3,15 +3,29 @@
 import { Button } from "@/components/ui/button";
 import { CartItem } from "@/components/cart/cartItem";
 import { LuX } from "react-icons/lu";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Icons } from "@/components/ui/icons";
-
+import { useCart } from "@/providers/cart-provider";
+import EmptyList from "@/components/ui/custom/EmptyList";
+import Link from "next/link";
 
 const Cart = () => {
     const [open, setOpen] = useState(false);
+    const { orders } = useCart();
+    const isEmpty = orders.length === 0;
+
+    useEffect(() => {
+        if(isEmpty) setOpen(false)
+    }, [isEmpty]);
 
     return (
         <div className='relative'>
+            {
+                orders.length !== 0 &&
+                    <div className={"absolute top-0 right-0 w-4 h-4 rounded-full p-2 text-xs font-sofia font-bold text-white bg-customAccent z-10 flex items-center justify-center"}>
+                        { orders.length }
+                    </div>
+            }
             <div className='w-fit relative' onClick={() => setOpen(state => !state)}>
                 <Icons.cart className="w-[40px] hover:opacity-70 duration-300 cursor-pointer" />
             </div>
@@ -25,14 +39,27 @@ const Cart = () => {
                     </div>
                 </div>
                 <div className='flex flex-col py-4 gap-y-2 max-h-[450px] overflow-y-scroll hideScrollBar'>
-                    <div className='relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50'>
-                        <CartItem />
+                    <div className='relative max-h-[350px] scroll-hidden flex flex-col gap-y-2 cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50'>
+                        {
+                            orders.length > 0 ?
+                            orders.map(item => (
+                                <CartItem {...item} />
+                            )) : <EmptyList message={"Кошик порожній"} />
+                        }
                     </div>
                 </div>
-                <Button
-                    variant={"accent"}
-                    className='h-8 min-h-[32px] w-full'
-                >Замовити</Button>
+                <Link
+                    href={"/order"}
+                    onClick={() => setOpen(false)}
+                >
+                    <Button
+                        variant={"accent"}
+                        className='h-8 min-h-[32px] w-full'
+                        disabled={isEmpty}
+                    >
+                        Замовити
+                    </Button>
+                </Link>
             </div>
         </div>
     );

@@ -152,7 +152,7 @@
 }
 
 ::-webkit-scrollbar-track {
-  background-color: var(--secondaryLight);
+  /*background-color: var(--secondaryLight);*/
   -webkit-border-radius: 10px;
   border-radius: 10px;
 }
@@ -170,6 +170,15 @@
 .scrollbar-hidden {
   overflow: hidden;
 
+  scrollbar-color: transparent transparent; /*hides the scrollbar for firefox */
+  ::-webkit-scrollbar {
+    display: none !important;
+  }
+}
+
+.scroll-hidden {
+  overflow-y: scroll;
+  scrollbar-width: none;
   scrollbar-color: transparent transparent; /*hides the scrollbar for firefox */
   ::-webkit-scrollbar {
     display: none !important;
