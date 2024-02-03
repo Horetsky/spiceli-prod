@@ -48,18 +48,19 @@ const Cart = () => {
                         }
                     </div>
                 </div>
-                <Link
-                    href={"/order"}
-                    onClick={() => setOpen(false)}
-                >
                     <Button
                         variant={"accent"}
                         className='h-8 min-h-[32px] w-full'
                         disabled={isEmpty}
                     >
+                    <Link
+                        href={"/order"}
+                        className={"w-full"}
+                        onClick={() => setOpen(false)}
+                    >
                         Замовити
+                    </Link>
                     </Button>
-                </Link>
             </div>
         </div>
     );

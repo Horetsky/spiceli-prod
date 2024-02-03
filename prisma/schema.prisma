@@ -3,8 +3,9 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model Admin {
@@ -61,6 +62,18 @@ model Category {
   products  Products[]
   createdAt DateTime   @default(now())
   updatedAt DateTime   @default(now())
+}
+
+model Order {
+  id        String      @id @default(cuid())
+  data      Json
+  status    OrderStatus @default(IN_PROCESS)
+  createdAt DateTime    @default(now())
+}
+
+enum OrderStatus {
+  IN_PROCESS
+  DONE
 }
 
 enum ProductType {

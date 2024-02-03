@@ -21,11 +21,12 @@ import {
     FormLabel, 
     FormMessage
 } from "@/components/ui/form";
+import { ReactNode } from "react";
 
 interface IFormSelectProps<T extends FieldValues> {
     name: Path<T>;
     control: Control<T>;
-    label: string;
+    label: string | ReactNode;
     placeholder: string;
     description?: string;
     shouldUnregister?: boolean;
@@ -74,7 +75,7 @@ const FormSelect = <T extends FieldValues>({
                                     <SelectValue placeholder={placeholder} />
                                 </SelectTrigger>
                             </FormControl>
-                            <SelectContent>
+                            <SelectContent className={"max-h-[350px] overflow-y-scroll"}>
                                 <SelectGroup>
                                     <SelectLabel>{label}</SelectLabel>
                                     {

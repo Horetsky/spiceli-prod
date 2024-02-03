@@ -14,10 +14,13 @@ import {
     Path, 
     PathValue
 } from "react-hook-form";
+import MaskInput from "@/components/ui/form/MaskInput";
 
 interface IFormInputProps<T extends FieldValues> {
     name: Path<T>;
     control: Control<T>;
+    mask?: string;
+    maskChar?: string
     label: string;
     placeholder?: string;
     description?: string;
@@ -32,6 +35,8 @@ const FormInput = <T extends FieldValues>({
     name,
     control,
     label,
+    mask,
+    maskChar,
     defaultValue,
     shouldUnregister = false,
     type = 'text',
@@ -51,18 +56,32 @@ const FormInput = <T extends FieldValues>({
                 <FormItem>
                     <FormLabel>{label}</FormLabel>
                     <FormControl>
-                        <Input
-                            className={className}
-                            type={type}
-                            onChange={(e) => {
-                                const newValue = e.target.value;
-                                onChange(e);
-                                onChangeTrigger && onChangeTrigger(newValue);
-                            }}
-                            disabled={disabled || false}
-                            placeholder={placeholder}
-                            {...field}
-                        />
+                        {
+                            mask ?
+                                <MaskInput
+                                    onChange={(newValue) => {
+                                        onChange(newValue);
+                                        onChangeTrigger && onChangeTrigger(newValue);
+                                    }}
+                                    mask={mask}
+                                    maskChar={maskChar}
+                                    placeholder={placeholder}
+                                    {...field}
+                                    disabled={disabled}
+                                /> :
+                                <Input
+                                    className={className}
+                                    type={type}
+                                    onChange={(e) => {
+                                        const newValue = e.target.value;
+                                        onChange(e);
+                                        onChangeTrigger && onChangeTrigger(newValue);
+                                    }}
+                                    disabled={disabled || false}
+                                    placeholder={placeholder}
+                                    {...field}
+                                />
+                        }
                     </FormControl>
                     {
                         description &&

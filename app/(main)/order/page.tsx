@@ -4,8 +4,8 @@ import OrderedProducts from "@/app/(main)/order/_components/orderedProducts";
 const Page = () => {
     return (
         <>
-            <OrderForm />
             <OrderedProducts />
+            <OrderForm />
         </>
     )
 }
