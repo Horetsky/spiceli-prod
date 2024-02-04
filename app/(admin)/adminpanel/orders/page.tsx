@@ -16,8 +16,6 @@ const Page = async () => {
         }
     })
 
-    const data = orders.map(item => JSON.parse(item.data as string)) as DBOrder[]
-
     const adminOrders: AdminOrder[] = orders.map(item => ({
         id: item.id,
         status: item.status,

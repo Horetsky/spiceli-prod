@@ -96,7 +96,7 @@ const OrderForm = () => {
                 form.reset()
                 router.replace("/");
                 resetCart()
-                return "Замовлення оформлено."
+                return "Дякуємо за замовдення."
             },
             error: "Помилка. Спробуйте пізніше."
         })
@@ -213,7 +213,12 @@ const OrderForm = () => {
                                 </div>
                             </div>
 
-                            <Button type={"submit"} size={"lg"} className={"w-full text-[1rem] h-14"}>
+                            <Button
+                                type={"submit"}
+                                size={"lg"}
+                                disabled={orders.length === 0}
+                                className={"w-full text-[1rem] h-14"}
+                            >
                                 Оформити замовлення
                             </Button>
                         </div>

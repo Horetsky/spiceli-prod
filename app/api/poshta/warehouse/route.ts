@@ -21,7 +21,7 @@ export async function GET(req: Request) {
                 methodProperties: {
                     CityRef,
                     Limit: "50",
-                    TypeOfWarehouseRef: "841339c7-591a-42e2-8233-7a0a00f0ed6f"
+                    // TypeOfWarehouseRef: "841339c7-591a-42e2-8233-7a0a00f0ed6f"
                 }
             })
         })

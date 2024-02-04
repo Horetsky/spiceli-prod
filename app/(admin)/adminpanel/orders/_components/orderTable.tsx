@@ -5,17 +5,21 @@ import SearchPannel from "@/components/searchPannel/SearchPannel";
 import { Table, TableBody, TableCaption, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import EmptyList from "@/app/(admin)/adminpanel/(components)/EmptyList";
 import ProductTableItem from "@/app/(admin)/adminpanel/products/(components)/ProductTableItem";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AdminOrder } from "@/app/(admin)/adminpanel/orders/page";
 import OrderTableItem from "@/app/(admin)/adminpanel/orders/_components/orderTableItem";
+import { $Enums, OrderStatus } from "@prisma/client";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const OrderTable = ({ orders }: {orders: AdminOrder[]}) => {
     const [filteredProducts, setFilteredProducts] = useState<AdminOrder[]>(orders);
+    const [orderStatus, setOrderStatus] = useState<OrderStatus | "all">("all")
 
     function handleSearch (val: string) {
         if (val === "") {
             setFilteredProducts(orders)
         } else {
+            setOrderStatus("all")
             const filteredProducts = orders.filter(item => {
                 const term = val.toLowerCase()
                 const isName = item.order.name.toLowerCase().includes(term);
@@ -28,15 +32,34 @@ const OrderTable = ({ orders }: {orders: AdminOrder[]}) => {
         }
     }
 
+    useEffect(() => {
+        if (orderStatus === "all") {
+            setFilteredProducts(orders)
+        } else {
+            const filteredProducts = orders.filter(item => item.status === orderStatus)
+            setFilteredProducts(filteredProducts)
+        }
+    }, [orderStatus])
+
     return (
         <RefreshOnMount>
             <div className='flex flex-col gap-y-2 pt-6'>
-                <div className='grid grid-cols-1'>
+                <div className='grid grid-cols-[4fr_1fr] gap-x-6'>
                     <SearchPannel
                         className='rounded-[4px] w-[85%]'
                         placeholder='Пошук замовлень...'
                         searchFunc={handleSearch}
                     />
+                    <Select onValueChange={(val: OrderStatus | "all") => setOrderStatus(val)} value={orderStatus}>
+                        <SelectTrigger className="w-full">
+                            <SelectValue placeholder="Статус замовлення"/>
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectItem value={"all"}>Будь-який статус</SelectItem>
+                            <SelectItem value={OrderStatus.IN_PROCESS}>Нове</SelectItem>
+                            <SelectItem value={OrderStatus.DONE}>Виконано</SelectItem>
+                        </SelectContent>
+                    </Select>
                 </div>
                 <Table>
                     <TableCaption>

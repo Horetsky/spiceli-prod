@@ -12,7 +12,20 @@ interface pageProps {
     }
 }
 
-export const revalidate = 50
+export async function generateStaticParams() {
+    const data = await prisma.products.findMany({
+        where: {
+            type: "sweet"
+        },
+        select: { id: true }
+    })
+
+    return [
+        ...data.map(item => ({ slug: item.id }))
+    ]
+}
+
+export const revalidate = 86400
 export const dynamicParams = true
 
 const page: FC<pageProps> = async ({ params }) => {

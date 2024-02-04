@@ -7,6 +7,7 @@ import { LuMinus, LuPlus, LuX } from "react-icons/lu";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { redirect, useRouter } from "next/navigation";
+import EmptyList from "@/components/ui/custom/EmptyList";
 
 const OrderedProducts = () => {
     const { orders } = useCart()
@@ -14,12 +15,15 @@ const OrderedProducts = () => {
         <div>
             <h2 className={"font-sofia font-bold text-3xl mb-9 flex gap-1"}>
                 Кошик
-                <span>
-                    ({orders.length})
-                </span>
+                {
+                    orders.length > 0 &&
+                        <span>({orders.length})</span>
+                }
             </h2>
             <div className={"lex flex-col gap-y-6"}>
                 {
+                    orders.length === 0 ?
+                        <div className={"mt-36"}><EmptyList message={"Кошик порожній"} /></div>:
                     orders.map(item => (
                         <CartItem {...item}/>
                     ))
